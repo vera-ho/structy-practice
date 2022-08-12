@@ -1,26 +1,24 @@
-// Time complexity: O(n)
+// Time complexity: O(n^2)
 // Space complexity: O(n)
 
 const compress = (s) => {
     let result = "";
-    let count = 0;
-    let prevLetter = s[0];
+    let prev = curr = 0;
     
-    for(let i = 0; i <= s.length; i++) {
-        let currLetter = s[i];
+    while(curr <= s.length) {
+        let count = curr - prev;
       
-        if(prevLetter != currLetter) {
+        if(s[prev] != s[curr]) {
             if(count > 1) {
-                result += count + prevLetter
+                result += count + s[prev]     // nested O(n)
             } else {
-                result += prevLetter
+                result += s[prev]
             }
-        
-            prevLetter = currLetter;
-            count = 1;
+      
+            prev = curr;
         } else {
-            count++;
-        }
+            curr++;
+        } 
     }
     
     return result;
