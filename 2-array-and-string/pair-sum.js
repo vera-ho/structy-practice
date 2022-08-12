@@ -1,5 +1,5 @@
 // Time complexity: O(n^2)
-// Space complexity: O(n)
+// Space complexity: O(1)
 
 const pairSum = (numbers, targetSum) => {
     const pairs = [];
