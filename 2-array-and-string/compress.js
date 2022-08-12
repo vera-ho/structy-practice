@@ -1,8 +1,8 @@
-// Time complexity: O(n^2)
+// Time complexity: O(n)
 // Space complexity: O(n)
 
 const compress = (s) => {
-    let result = "";
+    let result = [];
     let prev = curr = 0;
     
     while(curr <= s.length) {
@@ -10,21 +10,16 @@ const compress = (s) => {
       
         if(s[prev] != s[curr]) {
             if(count > 1) {
-                result += count + s[prev]     // nested O(n)
+            result.push(count, s[prev]);
             } else {
-                result += s[prev]
+            result.push(s[prev]);
             }
-      
+        
             prev = curr;
         } else {
             curr++;
-        } 
+        }
     }
     
-    return result;
+    return result.join("");
 };
-  
-module.exports = {
-    compress,
-};
-  
