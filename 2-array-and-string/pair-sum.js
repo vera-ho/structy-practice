@@ -1,19 +1,16 @@
-// Time complexity: O(n^2)
-// Space complexity: O(1)
+// Time complexity: O(n)
+// Space complexity: O(n)
 
 const pairSum = (numbers, targetSum) => {
-    const pairs = [];
-    
-    for(let i = 0; i < numbers.length - 1; i++) {
-        for(let j = i + 1; j < numbers.length; j++ ) {
-            if(numbers[i] + numbers[j] === targetSum) return [i, j]
-        }
+    const values = {};
+  
+    for(let i = 0; i < numbers.length; i++) {
+      let num = numbers[i];
+      let diff = targetSum - num;
+      
+      if(diff in values) return [values[diff], i];
+      if(!values[num]) values[num] = i;
     }
-    
-    return pairs;
 };
   
-module.exports = {
-    pairSum,
-};
-  
+console.log(pairSum([3, 2, 5, 4, 1], 8))
