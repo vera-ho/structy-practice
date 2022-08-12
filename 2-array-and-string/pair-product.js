@@ -18,4 +18,3 @@ const pairProduct = (numbers, targetProduct) => {
 // pairProduct([4, 7, 9, 2, 5, 1], 35);  // -> [1, 4]
 // pairProduct([3, 2, 5, 4, 1], 10);     // -> [1, 2]
 // pairProduct([4, 6, 8, 2], 16);        // -> [2, 3]
-
