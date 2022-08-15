@@ -13,3 +13,10 @@ const sumList = (head) => {
     return sum;
 };
 
+// Time complexity: O(n) linear
+// Space complexity: O(n) linear - due to callstack
+// Recursive solution
+const sumList = (head) => {
+    if(!head) return 0;
+    return head.val + sumList(head.next)
+};
