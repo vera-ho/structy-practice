@@ -23,7 +23,7 @@ const linkedListValues = (head) => {
 // Time complexity: O(n) linear
 // Space complexity: O(n) linear
 // Recursive approach
-const linkedListValues = (head) => {
+const linkedListValuesRecursive = (head) => {
     let values = [];
     fillValues(head, values);
     return values;
