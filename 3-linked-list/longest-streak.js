@@ -1,6 +1,5 @@
 // Time complexity: O(n) linear
 // Space complexity: O(1) constant
-// Iterative solution
 const longestStreak = (head) => {
     let maxStreak = streak = 0;
     let current = head;
