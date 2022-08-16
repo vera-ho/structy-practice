@@ -53,7 +53,7 @@ const mergeLists = (head1, head2) => {
 };
 
 // Time complexity: O(n) linear - O( min(n, m) )
-// Space complexity: O(n) constant
+// Space complexity: O(n) linear - O( min(n, m) )
 // Recursive solution
 const mergeListsRecursive = (head1, head2) => {
     if(!head1 && !head2) return null;
