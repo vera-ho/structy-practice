@@ -21,3 +21,14 @@ const reverseList = (head) => {
     
     return prev;
 };
+
+// Time complexity: O(n) 
+// Space complexity: O(n)
+// Recursive solution
+const reverseListRecurseive = (head, prev = null) => {
+    if(!head) return prev;
+    
+    const next = head.next;
+    head.next = prev;
+    return reverseList(next, head);
+  };
