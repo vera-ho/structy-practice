@@ -23,3 +23,19 @@ const treeIncludesRecursiveDFS = (root, target) => {
     if(root.val === target) return true;
     return treeIncludes(root.left, target) || treeIncludes(root.right, target);
 };
+
+// Time complexity: O(n^2) quadratic due to shift
+// Space complexity: O(n) linear
+// Iterative BFS Solution
+const treeIncludesIterativeBFS = (root, target) => {
+    if(!root) return false;
+    
+    let queue = [root];
+    while(queue.length > 0) {
+        let current = queue.shift();  // O(n)
+        if(current.val === target) return true;
+        if(current.left) queue.push(current.left);
+        if(current.right) queue.push(current.right);
+    }
+    return false;
+};
