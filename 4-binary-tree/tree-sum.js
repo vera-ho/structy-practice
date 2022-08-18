@@ -26,3 +26,21 @@ const treeSumRecursiveDFS = (root) => {
     let rightSum = treeSum(root.right);
     return root.val + leftSum + rightSum;
 };
+
+// Time complexity: O(n)
+// Space complexity: O(n)
+// Iterative solution with BFS
+const treeSumIterativeBFS = (root) => {
+    if(!root) return 0;
+    let queue = [root];
+    let sum = 0;
+    
+    while(queue.length > 0) {
+        let currNode = queue.shift();
+        sum += currNode.val;
+        if(currNode.left) queue.push(currNode.left);
+        if(currNode.right) queue.push(currNode.right);
+    }
+    
+    return sum;
+};
