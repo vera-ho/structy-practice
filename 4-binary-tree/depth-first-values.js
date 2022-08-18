@@ -34,5 +34,6 @@ const depthFirstValuesRecursive = (root) => {
     
     let left = depthFirstValues(root.left);
     let right = depthFirstValues(root.right);
-    return [root.val].concat(left, right);
+    return [root.val, ...left, ...right];
+    // return [root.val].concat(left, right); // both work
 };
