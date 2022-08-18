@@ -24,3 +24,19 @@ const treeMinValueRecursive = (root) => {
     return Math.min(root.val, leftMin, rightMin);
 };
 
+// Time complexity: O(n^2) quadratic due to shift
+// Space complexity: O(n) linear
+// Iterative BFS solution
+const treeMinValueBFS = (root) => {
+    let minVal = Infinity;
+    let queue = [root];
+    
+    while(queue.length > 0) {
+        let currentNode = queue.shift();
+        if(minVal > currentNode.val) minVal = currentNode.val;
+        if(currentNode.left) queue.push(currentNode.left);
+        if(currentNode.right) queue.push(currentNode.right);
+    }
+    
+    return minVal;
+};
