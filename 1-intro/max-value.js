@@ -1,3 +1,8 @@
+/** Approach: 
+ *    - Keep track of most recently found max value
+ *    - If the next value is larger than current max, save as new max
+ */
+
 // Time complexity: O(n) linear
 // Space complexity: O(1) constant
 const maxValue = (nums) => {
