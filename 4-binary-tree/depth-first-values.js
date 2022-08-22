@@ -12,7 +12,7 @@
 const depthFirstValues = (root) => {
     if(!root) return [];
     
-    // Uses a stack -> array; only add/remove from one end (FILO)
+    // Uses a stack -> array; only add/remove from one end (LIFO)
     let stack = [root];
     let values = [];
     
