@@ -15,3 +15,12 @@ const treeValueCount = (root, target) => {
     return count;
 };
 
+// Time complexity: O(n) linear
+// Space complexity: O(n) linear
+// Recursive DFS solution
+const treeValueCountDFSRecursive = (root, target) => {
+    if(!root) return 0;
+    let childCount = treeValueCount(root.left, target) + treeValueCount(root.right, target);
+    if(root.val === target) return (childCount + 1)
+    else return (childCount)
+};
