@@ -27,12 +27,12 @@ const longestStreak2 = (head) => {
     let current = prev = head;
     
     while(current) {
-      if(current.val === prev.val) count++
-      else count = 1
-      
-      if(count > maxCount) maxCount = count;
-      prev = current;
-      current = current.next;
+        if(current.val === prev.val) count++
+        else count = 1
+        
+        if(count > maxCount) maxCount = count;
+        prev = current;
+        current = current.next;
     }
     return maxCount;
-  };
+};
