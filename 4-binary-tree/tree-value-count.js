@@ -24,3 +24,21 @@ const treeValueCountDFSRecursive = (root, target) => {
     if(root.val === target) return (childCount + 1)
     else return (childCount)
 };
+
+// Time complexity: O(n) linear
+// Space complexity: O(n) linear
+// Iterative BFS solution
+const treeValueCountBFSIterative = (root, target) => {
+    if(!root) return 0;
+    let queue = [ root ];
+    let count = 0;
+    
+    while(queue.length > 0) {
+        let node = queue.shift();
+        if(node.left) queue.push(node.left);
+        if(node.right) queue.push(node.right);
+        if(node.val === target) count++;
+    }
+    
+    return count;
+};
