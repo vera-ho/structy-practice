@@ -25,22 +25,3 @@ const leafListRecursive = (root) => {
     if(!root.left && !root.right) return [root.val]
     return [...leafList(root.left), ...leafList(root.right)]
 };
-
-// Time complexity: O(n) linear
-// Space complexity: O(n) linear
-// BFS solution
-const leafListBFS = (root) => {
-    if(!root) return [];
-    
-    const leaves = [];
-    const queue = [ root ];
-    
-    while(queue.length > 1) {
-        let node = queue.shift();
-        if(node.left) queue.push(node.left); 
-        if(node.right) queue.push(node.right);
-        if(!node.left && !node.right) leaves.push(node.val);
-    }
-    
-    return leaves;
-}
