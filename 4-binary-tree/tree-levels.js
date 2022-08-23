@@ -52,3 +52,34 @@ const treeLevelsRecursive = (root) => {
     
     return treeValues;
 };
+
+// Time complexity: O(n) linear
+// Space complexity: O(n) linear
+// Iterative BFS solution
+const treeLevelsBFS = (root) => {
+    if(!root) return [];
+  
+    const levels = [0];
+    const queue = [ root ];
+    const treeValues = []
+    
+    while(queue.length > 0) {
+        let node = queue.shift();
+        let level = levels.shift();
+        
+        if(node.left) {
+            levels.push(level + 1);
+            queue.push(node.left);
+        }
+        
+        if(node.left) {
+            levels.push(level + 1);
+            queue.push(node.left);
+        }
+        
+        if(treeValues[level]) treeValues[level].push(root.val);
+        else treeValues.push([root.val])
+    }
+    
+    return treeValues;
+};
