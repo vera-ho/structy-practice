@@ -29,7 +29,7 @@ const treeLevels = (root) => {
     return treeValues;
 };
 
-// Time complexity: O(n^2) linear
+// Time complexity: O(n^2) quadratic
 // Space complexity: O(n) linear
 // Recursive DFS solution
 const treeLevelsRecursive = (root) => {
