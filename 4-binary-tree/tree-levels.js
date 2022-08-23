@@ -28,3 +28,27 @@ const treeLevels = (root) => {
     
     return treeValues;
 };
+
+// Time complexity: O(n^2) linear
+// Space complexity: O(n) linear
+// Recursive DFS solution
+const treeLevelsRecursive = (root) => {
+    if(!root) return [];
+    if(!root.left && !root.right) return [[root.val]]
+    
+    const treeValues = [[root.val]];
+    const left = treeLevels(root.left);
+    const right = treeLevels(root.right);
+    
+    for(let i = 0; i < left.length; i++) {
+        if(treeValues[i + 1]) treeValues[i + 1] = treeValues[i + 1].concat(left[i]);
+        else treeValues[i + 1] = left[i];
+    }
+    
+    for(let i = 0; i < right.length; i++) {
+        if(treeValues[i + 1]) treeValues[i + 1] = treeValues[i + 1].concat(right[i]);
+        else treeValues[i + 1] = right[i];
+    }
+    
+    return treeValues;
+};
