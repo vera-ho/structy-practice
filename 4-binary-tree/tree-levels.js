@@ -61,7 +61,7 @@ const treeLevelsBFS = (root) => {
   
     const levels = [0];
     const queue = [ root ];
-    const treeValues = []
+    const treeValues = [];
     
     while(queue.length > 0) {
         let node = queue.shift();
@@ -77,9 +77,51 @@ const treeLevelsBFS = (root) => {
             queue.push(node.left);
         }
         
-        if(treeValues[level]) treeValues[level].push(root.val);
-        else treeValues.push([root.val])
+        if(treeValues[level]) treeValues[level].push(node.val);
+        else treeValues.push([node.val])
     }
     
+    return treeValues;
+};
+
+// Time complexity: O(n) linear
+// Space complexity: O(n) linear
+// Iterative BFS solution
+const treeLevelsHashBFS = (root) => {
+    if(!root) return [];
+  
+    const queue = [ { node: root, level: 0 } ];
+    const treeValues = [];
+    
+    while(queue.length > 0) {
+        let { node, level }  = queue.shift();
+        
+        if(node.left) queue.push({ node: node.left, level: level + 1 });
+        if(node.right) queue.push({ node: node.right, level: level + 1 });
+        
+        if(treeValues[level]) treeValues[level].push(node.val);
+        else treeValues.push([node.val])
+    }
+    
+    return treeValues;
+};
+
+// Time complexity: O(n) linear
+// Space complexity: O(n) linear
+// Recursive DFS solution
+const treeLevelsRecursive2 = (root) => {
+    const treeValues = [];
+    
+    const treeHelper = (root, level, treeValues) => {
+        if(!root) return;
+    
+        if(treeValues[level]) treeValues[level].push(root.val);
+        else treeValues[level] = [root.val]
+        
+        if(root.left) treeHelper(root.left, level + 1, treeValues);
+        if(root.right) treeHelper(root.right, level + 1, treeValues);
+    }
+    
+    treeHelper(root, 0, treeValues);
     return treeValues;
 };
