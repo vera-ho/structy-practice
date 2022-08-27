@@ -4,21 +4,22 @@
 const undirectedPath = (edges, nodeA, nodeB) => {
     let graph = convertToGraph(edges);
     let stack = [ nodeA ];
-    let visited = []; // use set?
+    let visited = new Set();
     
     while(stack.length) {
-      let current = stack.pop();
-      if(current === nodeB) return true;
-    
-      if(!visited.includes(current)) {
-        visited.push(current)
-        for(let node of graph[current]) {
-          stack.push(node)
+        let current = stack.pop();
+        if(current === nodeB) return true;
+        
+        if(!visited.has(current)) {
+            visited.add(current)
+            for(let node of graph[current]) {
+            stack.push(node)
+            }
         }
-      }
     }
+    
     return false;
-};
+  };
   
 // Time complexity: O(e) linear
 // Space complexity: O(n) linear
@@ -26,14 +27,14 @@ const undirectedPath = (edges, nodeA, nodeB) => {
 const undirectedPathBFS = (edges, nodeA, nodeB) => {
     let graph = convertToGraph(edges);
     let queue = [ nodeA ];
-    let visited = []; // use set?
+    let visited = new Set(); 
     
     while(queue.length) {
         let current = queue.shift();
         if(current === nodeB) return true;
         
-        if(!visited.includes(current)) {
-            visited.push(current)
+        if(!visited.has(current)) {
+            visited.add(current)
             for(let node of graph[current]) {
             queue.push(node)
             }
@@ -51,19 +52,18 @@ const undirectedPathRecursiveDFS = (edges, nodeA, nodeB) => {
     return findPath(graph, nodeA, nodeB);
 };
   
-const findPath = (graph, nodeA, nodeB, visited = []) => {
-    if(!nodeA) return false;
+const findPath = (graph, nodeA, nodeB, visited = new Set()) => {
+    if(visited.has(nodeA)) return false;
     if(nodeA === nodeB) return true;
     
-    if(!visited.includes(nodeA))  {
-        visited.push(nodeA);
-        for(let node of graph[nodeA]) {
-            if(findPath(graph, node, nodeB, visited)) return true;
-        }
+    visited.add(nodeA);
+    for(let node of graph[nodeA]) {
+        if(findPath(graph, node, nodeB, visited)) return true;
     }
     return false;
-}
+};
 
+// Helper function
 const convertToGraph = edges => {
     let graph = {};
 
