@@ -44,9 +44,9 @@ const undirectedPathBFS = (edges, nodeA, nodeB) => {
     return false;
 };
 
-// // Time complexity: O(e) linear
-// // Space complexity: O(n) linear
-// // Recursive DFS solution
+// Time complexity: O(e) linear
+// Space complexity: O(n) linear
+// Recursive DFS solution
 const undirectedPathRecursiveDFS = (edges, nodeA, nodeB) => {
     let graph = convertToGraph(edges);
     return findPath(graph, nodeA, nodeB);
