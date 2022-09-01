@@ -1,3 +1,5 @@
+// Time complexity: O(e)
+// Space complexity: O(n)
 const shortestPath = (edges, nodeA, nodeB) => {
     let graph = convertToGraph(edges);
     let visited = new Set();
