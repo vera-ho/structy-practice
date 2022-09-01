@@ -1,5 +1,5 @@
-// Time complexity: O(n * m) 
-// Space complexity: O(n * m)
+// Time complexity: O(n * m) linear
+// Space complexity: O(n * m) linear
 const islandCount = (grid) => {
     let visited = new Set();
     let count = 0;

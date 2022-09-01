@@ -1,5 +1,5 @@
-// Time complexity: O(n x m)
-// Space complexity: O(n x m)
+// Time complexity: O(n x m) linear
+// Space complexity: O(n x m) linear
 const minimumIsland = (grid) => {
     const visited = new Set();
     let minSize = Infinity;
