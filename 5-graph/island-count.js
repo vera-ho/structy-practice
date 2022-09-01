@@ -1,3 +1,5 @@
+// Time complexity: O(n * m) 
+// Space complexity: O(n * m)
 const islandCount = (grid) => {
     let visited = new Set();
     let count = 0;
