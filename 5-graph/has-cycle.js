@@ -3,10 +3,8 @@ const hasCycle = (graph) => {
     const visited = new Set();
     
     for(let node in graph) {
-        if(!visited.has(node)) {
-            let cycle = detectCycle(graph, node, visiting, visited);
-            if(cycle) return true;
-        }
+        let cycle = detectCycle(graph, node, visiting, visited);
+        if(cycle) return true;
     }
     
     return false;
