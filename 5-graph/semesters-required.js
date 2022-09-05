@@ -1,7 +1,7 @@
 // Time complexity: O(e) linear
 // Space complexity: O(n) linear
 // Prereqs are like edges -> can convert to graph
-// Number of semesters = longest path
+// Number of semesters = longest path; return number of nodes in path
 const semestersRequired = (numCourses, prereqs) => {
     const graph = convertToGraph(prereqs);
     const pathLengths = {};
