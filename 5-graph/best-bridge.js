@@ -9,7 +9,7 @@ const bestBridge = (grid) => {
           
             if(grid[row][col] === 'L' && !visited.has(pos)) {
                 visited.add(pos);
-                
+
                 let islandMap = traverseIsland(grid, row, col, visited);
                 let bridgeLength = findShortestBridge(grid, islandMap, visited);
                 return bridgeLength;
@@ -67,4 +67,37 @@ const inBounds = (row, col, grid) => {
     const inBoundsRow = row >= 0 && row < grid.length;
     const inBoundsCol = col >= 0 && col < grid[0].length;
     return inBoundsRow && inBoundsCol;
-}
+};
+
+// ********************************************************* //
+// Time complexity: O(n x m) linear
+// Space complexity: O(n x m) linear
+const bestBridgeRecursive = (grid) => {
+    const visited = new Set();
+    
+    for(let row = 0; row < grid.length; row++) {
+        for(let col = 0; col < grid[row].length; col++) {
+            let pos = row + " " + col;
+          
+            if(grid[row][col] === 'L' && !visited.has(pos)) {
+                let islandMap = mapIslandRecursively(grid, row, col, visited, [[row, col, 0]]);
+                let bridgeLength = findShortestBridge(grid, islandMap, visited);
+                return bridgeLength;
+            }
+        }
+    }
+};
+
+const mapIslandRecursively = (grid, row, col, visited, map) => {
+    if(!inBounds(row, col, grid) || grid[row][col] === 'W' || visited.has(row + ' ' + col)) return map;
+    visited.add(row + ' ' + col);
+    map.push( [row, col, 0] );
+    
+    const dirs = [ [0, 1], [1, 0], [-1, 0], [0, -1] ];
+    for(let directions of dirs) {
+        let [dRow, dCol] = directions;
+        let [nextRow, nextCol] = [row + dRow, col + dCol];
+        mapIslandRecursively(grid, nextRow, nextCol, visited, map);
+    }
+    return map;
+};
