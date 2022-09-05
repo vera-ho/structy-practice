@@ -18,7 +18,6 @@ const mostFrequentChar = (s) => {
   
 // console.log(mostFrequentChar("hello"))
 // console.log(mostFrequentChar("potato"))
-
   
 // Time complexity: O(n) linear
 // Space complexity: O(n) linear
