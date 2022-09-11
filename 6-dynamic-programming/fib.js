@@ -1,5 +1,6 @@
 // Time complexity: O(n) linear
 // Space complexity: O(n) linear
+// Without memoization, time complexity would be eponential O(2^n)
 const fib = (n, fibValues = {}) => {
     if(n === 0) {
         fibValues[n] = 0;
