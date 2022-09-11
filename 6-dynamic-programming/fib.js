@@ -21,13 +21,9 @@ const fib = (n, fibValues = {}) => {
 // Time complexity: O(n) linear
 // Space complexity: O(n) linear
 const fibBetter = (n, fibValues = {}) => {
-    if(n === 0) return 0;
-    if(n === 1) return 1;
+    if(n === 0 || n === 1) return n;
     if(n in fibValues) return fibValues[n];
     
-    let n1Fib = fib(n - 1, fibValues);
-    let n2Fib = fib(n - 2, fibValues);
-    
-    fibValues[n] = n1Fib + n2Fib;
+    fibValues[n] = fib(n - 1, fibValues) + fib(n - 2, fibValues);
     return fibValues[n];  
 };
