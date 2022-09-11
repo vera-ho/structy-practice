@@ -11,12 +11,9 @@ const fib = (n, fibValues = {}) => {
         return 1;
     }
     
-    let n1Fib = fibValues[n - 1] ? fibValues[n - 1] : fib(n - 1, fibValues);
-    let n2Fib = fibValues[n - 2] ? fibValues[n - 2] : fib(n - 2, fibValues);
+    let n1Fib = fibValues[n - 1] ? fibValues[n - 1] : fibValues[n - 1] = fib(n - 1, fibValues)
+    let n2Fib = fibValues[n - 2] ? fibValues[n - 2] : fibValues[n - 2] = fib(n - 2, fibValues)
     
-    fibValues[n - 1] = n1Fib;
-    fibValues[n - 2] = n2Fib;
     fibValues[n] = n1Fib + n2Fib;
-    
     return fibValues[n];  
 };
