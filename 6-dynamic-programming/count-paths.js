@@ -2,16 +2,15 @@
 // Space complexity: O(r x c) linear
 // Without memoization, time complexity is O(2^(r+c)) exponential, space complexity is O(r + c)
 const countPaths = (grid, row = 0, col = 0, pathCtr = {}) => {
-    if(grid[grid.length - 1][grid[0].length - 1] === 'X') return 0;
-    if(row === grid.length - 1 && col === grid[0].length - 1) return 1;
+    let pos = row + " " + col;
+    if(pos in pathCtr) return pathCtr[pos];
     if(outOfBounds(grid, row, col)) return 0;
-    if([row, col] in pathCtr) return pathCtr[[row, col]];
+    if(row === grid.length - 1 && col === grid[0].length - 1) return 1;
     
     let down = countPaths(grid, row + 1, col, pathCtr);
     let right = countPaths(grid, row, col + 1, pathCtr);
-    
-    pathCtr[[row, col]] = down + right;
-    return pathCtr[[row, col]];
+    pathCtr[pos] = down + right;
+    return pathCtr[pos];
 };
 
 const outOfBounds = (grid, row, col) => {
