@@ -15,3 +15,18 @@ const arrayStepper = (nums, index = 0, steps = {}) => {
     steps[index] = possible;
     return possible;
 };
+
+const arrayStepperBetter = (nums, index = 0, steps = {}) => {
+    if(index >= nums.length - 1) return true;
+    if(index in steps) return steps[index];
+    
+    let num = nums[index];
+    let possible = false;
+    for(let i = 1; i <= num; i++) {
+      possible = possible || arrayStepper(nums, index + i, steps);
+      if(possible) break;
+    }
+    
+    steps[index] = possible;
+    return possible;
+  };
