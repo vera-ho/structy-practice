@@ -1,2 +1,2 @@
 # Structy
-Recording my practice on structy
+Recording practice on Structy
