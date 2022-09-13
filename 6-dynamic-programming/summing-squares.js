@@ -8,8 +8,6 @@ const summingSquares = (n, sums = {}) => {
     let i = 1;
     while(i <= Math.sqrt(n)) {
         let square = Math.pow(i, 2);
-        if(square > n) break;
-        
         let sum = summingSquares(n - square, sums);
         if(sum < minSum) minSum = sum;
         i += 1;
