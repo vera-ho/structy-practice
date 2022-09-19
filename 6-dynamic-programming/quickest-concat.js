@@ -13,10 +13,10 @@ const quickestConcat = (s, words) => {
     for(let word of words) {
         if(s.startsWith(word)) {
             let wordCt = concatCounter(s.slice(word.length), words, dictionary);
-            minWords = Math.min(minWords, wordCt);
+            minWords = Math.min(minWords, wordCt + 1);
         }
     }
   
-    dictionary[s] = minWords + 1;
+    dictionary[s] = minWords;
     return dictionary[s];
 }
