@@ -11,8 +11,7 @@ const pairedParentheses = (str) => {
             else return false;
         }
     }
-    
-    if(!stack.length) return true;
+        if(!stack.length) return true;
     else return false;
 };
 
@@ -27,6 +26,5 @@ const pairedParenthesesFaster = (str) => {
         if(char === ")") ctr--;
     }
     
-    if(ctr === 0) return true;
-    else return false;
+    return ctr === 0;
 };
