@@ -15,3 +15,18 @@ const pairedParentheses = (str) => {
     if(!stack.length) return true;
     else return false;
 };
+
+// Time complexity: O(n) linear
+// Space complexity: O(1) constant
+const pairedParenthesesFaster = (str) => {
+    let ctr = 0;
+    
+    for(let char of str) {
+        if(ctr === -1) return false;
+        if(char === "(") ctr++;
+        if(char === ")") ctr--;
+    }
+    
+    if(ctr === 0) return true;
+    else return false;
+};
