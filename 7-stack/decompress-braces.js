@@ -1,4 +1,4 @@
-// Time Complexity: O(9^m x s) exponential
+// Time Complexity: O(9^m x s) exponential where m = number of nests; s = length of string
 // Space Complexity: O(9^m x s) exponential
 const decompressBraces = (s) => {
     const stack = [];
@@ -23,8 +23,8 @@ const decompressBraces = (s) => {
 
 const _decompress = (stack) => {
     let numbers = '0123456789';
-    let substring = '';
     let multiplier = 1;
+    let substring = '';
     
     while(multiplier === 1) {
         let char = stack.pop();
@@ -32,6 +32,17 @@ const _decompress = (stack) => {
         else substring = char + substring;
     }
     
-    substring = substring.repeat(multiplier);
-    return substring;
+    return substring.repeat(multiplier);
 }
+
+// Time Complexity: O(9^m x s) exponential where m = number of nests; s = length of string
+// Space Complexity: O(9^m x s) exponential
+const decompressBracesCleaned = (s) => {
+    const stack = [];
+    for(let char of s) {
+        if(char === '}') stack.push(_decompress(stack));
+        else if(char !== '{') stack.push(char);
+    }
+    
+    return stack.join('');  
+};
