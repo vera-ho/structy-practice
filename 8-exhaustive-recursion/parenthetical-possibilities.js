@@ -60,4 +60,3 @@ const getChoices = s => {
         return { remainder, choices }
     }
 }
-  
