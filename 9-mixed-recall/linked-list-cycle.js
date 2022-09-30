@@ -18,3 +18,21 @@
     
     return false;
 };
+
+/** Time complexity: O(n) linear
+ *  Space complexity: O(1) constant
+ *  Approach: 
+ *    - Use a slow and fast pointer 
+ *    - If there is a cycle, fast will lap slow and land on the same node again sometime
+ */
+ const linkedListCyclePointers = (head) => {
+    let slow = head;
+    let fast = head;
+    
+    while(fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if(fast == slow) return true;
+    }
+    return false;
+};
