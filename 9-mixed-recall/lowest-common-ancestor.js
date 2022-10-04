@@ -38,3 +38,33 @@
     
     return null;
 }
+
+const lowestCommonAncestorCleaner = (root, val1, val2) => {
+    const path1 = findPath(root, val1);
+    const path2 = findPath(root, val2);
+    const visited = new Set(path1);
+  
+    for(let val of path2) {
+      if(visited.has(val)) return val;
+    }
+  }
+  
+  const findPathCleaner = (node, val) => {
+    if(!node) return null;
+    if(node.val === val) return [ node.val ];
+  
+    let left = findPath(node.left, val);
+    let right = findPath(node.right, val);
+    
+    if(left) {
+        left.push(node.val);
+        return left;
+    }
+    
+    if(right) {
+        right.push(node.val)
+        return right;
+    } 
+    
+    return null;
+  }
