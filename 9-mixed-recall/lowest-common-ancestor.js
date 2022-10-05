@@ -10,11 +10,11 @@
     const path2 = findPath(root, val2);
   
     for(let val of path2) {
-      if(visited.has(val)) return val;
+        if(visited.has(val)) return val;
     }
-  }
-  
-  const findPath = (node, val, visited = new Set()) => {
+}
+
+const findPath = (node, val, visited = new Set()) => {
     if(!node) return null;
     if(node.val === val) {
         visited.add(node.val);
@@ -45,9 +45,9 @@ const lowestCommonAncestorCleaner = (root, val1, val2) => {
     const visited = new Set(path1);
   
     for(let val of path2) {
-      if(visited.has(val)) return val;
+        if(visited.has(val)) return val;
     }
-  }
+}
   
   const findPathCleaner = (node, val) => {
     if(!node) return null;
@@ -67,4 +67,4 @@ const lowestCommonAncestorCleaner = (root, val1, val2) => {
     } 
     
     return null;
-  }
+}
