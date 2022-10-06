@@ -16,3 +16,22 @@
     
     return leftNodes;
 };
+
+/** 
+ * Recursive DFS solution
+ * Time complexity: O(n) linear
+ * Space complexity: O(n) linear
+ */
+ const leftyNodesRecursive = (root) => {
+    const values = [];
+    findNodes(root, 0, values);
+    return values;
+};
+
+const findNodes = (node, level, values) => {
+    if(!node) return null;
+    if(!values[level]) values.push(node.val);
+    findNodes(node.left, level + 1, values);
+    findNodes(node.right, level + 1, values);
+}
+
