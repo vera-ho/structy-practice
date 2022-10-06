@@ -35,3 +35,22 @@ const findNodes = (node, level, values) => {
     findNodes(node.right, level + 1, values);
 }
 
+/** 
+ * BFS solution
+ * Time complexity: O(n) linear
+ * Space complexity: O(n) linear
+ */
+ const leftyNodesBFS = (root) => {
+    if(!root) return [];
+    const queue = [ [root, 0] ];
+    const values = [];
+    
+    while(queue.length) {
+        let [current, level] = queue.shift();
+        if(current.left) queue.push([current.left, level + 1]);
+        if(current.right) queue.push([current.right, level + 1]);
+        if(!values[level]) values.push(current.val)
+    }
+    
+    return values;
+};
