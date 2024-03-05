@@ -34,3 +34,33 @@ const anagrams = (s1, s2) => {
     
     return !Object.values(ctr).some( value => value !== 0)
 };
+
+// approach: use an object to count characters in one string
+//           then subtract characters from the other string. 
+//           if all characters are 0 at the end, then the strings are anagrams
+
+// time complexity: O(n) 
+// space complexity: O(n)
+const anagrams2 = (s1, s2) => {
+  if (s1.length != s2.length) return false;
+  
+  const count = {};
+  
+  for (let char of s1) {
+    if (count[char]) {
+      count[char] = count[char] + 1
+    } else {
+      count[char] = 1;
+    }
+  }
+
+  for (let char of s2) {
+    if (count[char]) {
+      count[char] = count[char] -1
+    } else {
+      count[char] = -1
+    }
+  }
+  
+  return Object.values(count).every(v => v === 0)
+};
