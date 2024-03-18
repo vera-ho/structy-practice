@@ -34,3 +34,13 @@ const fillValues = (head, values) => {
     values.push(head.val);
     fillValues(head.next, values);
 }
+
+// Write a function, linkedListValues, that takes in the head of a linked list as an argument. The function should return an array containing all values of the nodes in the linked list.
+// approach - recursively
+// traverse linked list and push each value into an array
+// time complexity: linear O(n)
+// space complexity: linear O(n)
+const linkedListValues2 = (head) => {
+  if (!head) return [];
+  return [head.val, ...linkedListValues(head.next)]
+};
