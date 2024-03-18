@@ -24,7 +24,7 @@ const linkedListFindRecursive = (head, target) => {
 // iterate through list and check if each value is equal to the target
 // return true if value is found, false otherwise
 // time complexity: linear O(n)
-// space complexity: constant O(n)
+// space complexity: constant O(n) (iterative) or linear O(n) (recursive)
 const linkedListFind2Rec = (head, target) => {
   if (!head) return false;
   return head.val === target || linkedListFind(head.next, target)

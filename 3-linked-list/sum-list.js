@@ -36,7 +36,7 @@ const sumListRecursive = (head) => {
 // approach
 // Iterate through each node of the linked list and add values as we go along
 // time complexity: linear O(n)
-// space complexity: constant O(n)
+// space complexity: constant O(n) for linear / linear O(n) for recursive
 const sumList2 = (head) => {
   let sum = 0;
   let currentNode = head;
