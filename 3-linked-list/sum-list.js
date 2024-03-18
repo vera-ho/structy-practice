@@ -30,3 +30,26 @@ const sumListRecursive = (head) => {
     if(!head) return 0;
     return head.val + sumListRecursive(head.next)
 };
+
+
+// Write a function, sumList, that takes in the head of a linked list containing numbers as an argument. The function should return the total sum of all values in the linked list.
+// approach
+// Iterate through each node of the linked list and add values as we go along
+// time complexity: linear O(n)
+// space complexity: constant O(n)
+const sumList2 = (head) => {
+  let sum = 0;
+  let currentNode = head;
+  
+  while (currentNode) {
+    sum += currentNode.val;
+    currentNode = currentNode.next;
+  }
+  
+  return sum;
+};
+
+const sumList2Rec = (head) => {
+  if (!head) return 0;
+  return head.val + sumList(head.next);
+};
