@@ -24,3 +24,22 @@ const fiveSort = (nums) => {
 module.exports = {
     fiveSort,
 };
+
+// old
+const fiveSort2 = (nums) => {
+  let fiveIdx = nums.length - 1;
+  let frontIdx = 0;
+  
+  while(frontIdx < fiveIdx) {
+    if(nums[frontIdx] === 5 && nums[fiveIdx] !== 5) {
+      [nums[frontIdx], nums[fiveIdx]] = [nums[fiveIdx], nums[frontIdx]];
+      frontIdx += 1;
+      fiveIdx -= 1;
+    } else if(nums[fiveIdx] === 5) {
+      fiveIdx -= 1;
+    } else {
+      frontIdx += 1;
+    }
+  }
+}
+
