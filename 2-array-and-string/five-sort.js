@@ -25,7 +25,6 @@ module.exports = {
     fiveSort,
 };
 
-// old
 const fiveSort2 = (nums) => {
   let fiveIdx = nums.length - 1;
   let frontIdx = 0;
@@ -41,5 +40,31 @@ const fiveSort2 = (nums) => {
       frontIdx += 1;
     }
   }
+
+  return nums;
 }
 
+// approach
+// Use two pointers to track progress within the array - one at the beginning and one at the very end
+// Iterate until the pointers have met or crossed (left >= right)
+// if the right value is a 5, decrement right pointer
+// if the left value is not a 5, increment left pointer
+// if the left value is a 5 and the right value is not a 5, swap the values, increment the left pointer and decrement the right pointer
+// time complexity: linear O(n)
+// space complexity: constant O(1) - in place operation
+const fiveSort3 = (nums) => {
+  let left = 0;
+  let right = nums.length -1;
+  
+  while (left < right) {
+    if (nums[left] === 5 && nums [right] != 5) {
+      [nums[left], nums[right]] = [nums[right], nums[left]]
+    } else if (nums[right] === 5) {
+      right--;
+    } else if (nums[left] != 5) {
+      left++;
+    } 
+  }
+  
+  return nums;
+};
