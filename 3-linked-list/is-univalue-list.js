@@ -38,6 +38,8 @@ const isUnivalueList2 = (head) => {
   return true;
 };
 
+// Time complexity: linear O(n)
+// Space complexity: linear O(n) call stack
 const isUnivalueList2Rec = (head) => {
   if (!head) return true;
   const next = head.next;
