@@ -43,3 +43,21 @@ const pathFinderHelp = (root, target) => {
     return null;
   };
   
+
+// Write a function, pathFinder, that takes in the root of a binary tree and a target value. The function should return an array representing a path to the target value. If the target value is not found in the tree, then return null.
+// You may assume that the tree contains unique values.
+
+// Approach: 
+// Recursive DFS to pathfind
+// When value is found, return array with the values of each node in the path going back 'up'
+// Return null when a path doesn't have the value
+const pathFinder2 = (root, target) => {
+  if (!root) return null;
+  if (root.val === target) return [root.val];
+  
+  const left = pathFinder(root.left, target);
+  const right = pathFinder(root.right, target);
+  if (left) return [root.val, ...left];
+  if (right) return [root.val, ...right];
+  return null;
+};
