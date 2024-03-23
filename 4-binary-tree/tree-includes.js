@@ -39,3 +39,31 @@ const treeIncludesIterativeBFS = (root, target) => {
     }
     return false;
 };
+
+
+const treeIncludes2 = (root, target) => {
+  if (!root) return false;
+  
+  const structure = [root];
+  while (structure.length) {
+    // DFS - linear O(n)
+    // const current = structure.pop();
+    // if (current.val === target) return true;
+    // if (current.right) structure.push(current.right);
+    // if (current.left) structure.push(current.left);
+    
+    // BFS - quadratic O(n^2) due to shift in js
+    const current = structure.shift();
+    if (current.val === target) return true;
+    if (current.left) structure.push(current.left);
+    if (current.right) structure.push(current.right);
+  }
+  
+  return false;
+};
+
+const treeIncludes2Rec = (root, target) => {
+  if (!root) return false;
+  if (root.val === target) return true;
+  return treeIncludes(root.left, target) || treeIncludes(root.right, target);
+};
