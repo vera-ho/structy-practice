@@ -25,3 +25,25 @@ const breadthFirstValues = (root) => {
     
     return values;
 };
+
+// Write a function, breadthFirstValues, that takes in the root of a binary tree. The function should return an array containing all values of the tree in breadth-first order.
+// Approach: 
+// Use a queue (FIFO) structure to hold nodes
+// For each node, starting at root, add left and right nodes to the queue
+// Save values to array in order of the queue
+// Time complexity: linear O(n)
+// Space complexity: linear O(n)
+const breadthFirstValues2 = (root) => {
+  if (!root) return [];
+  const queue = [root];
+  const values = [];
+  
+  while (queue.length) {
+    const node = queue.shift();
+    if (node.left) queue.push(node.left);
+    if (node.right) queue.push(node.right);
+    values.push(node.val);
+  }
+  
+  return values
+};
