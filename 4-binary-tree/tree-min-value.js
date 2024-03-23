@@ -40,3 +40,33 @@ const treeMinValueBFS = (root) => {
     
     return minVal;
 };
+
+// Write a function, treeMinValue, that takes in the root of a binary tree that contains number values. The function should return the minimum value within the tree.
+const treeMinValue2 = (root) => {
+  let minValue = Infinity;
+  
+  // stack for DFS & queue for BFS
+  const nodes = [ root ];
+  while (nodes.length) {
+    // DFS - linear O(n) time and space
+    // const current = nodes.pop();
+    // if (current.right) nodes.push(current.right);
+    // if (current.left) nodes.push(current.left);
+    // if (minValue > current.val) minValue = current.val;
+    
+    // BFS - quadratic O(n^2) time and linear O(n) space
+    const current = nodes.shift();
+    if (current.left) nodes.push(current.left);
+    if (current.right) nodes.push(current.right);
+    if (minValue > current.val) minValue = current.val;
+  }
+  
+  return minValue;
+};
+
+const treeMinValue2Rec = (root) => {
+  if (!root) return Infinity;
+  const minLeft = treeMinValue(root.left);
+  const minRight = treeMinValue(root.right);
+  return Math.min(root.val, minLeft, minRight);
+};
