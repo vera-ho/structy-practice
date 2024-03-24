@@ -41,3 +41,29 @@ const leafListRecursive2 = (root) => {
     leafFinder(root, leaves);
     return leaves;
 };
+
+// Write a function, leafList, that takes in the root of a binary tree and returns an array containing the values of all leaf nodes in left-to-right order.
+// Approach: 
+// Traverse the tree and when a leaf node is found, add to the output array
+// DFS needed because we want to preserve left to right order
+// Time complexity: linear O(n)
+// Space complexity: linear O(n)
+const leafList2 = (root) => {
+  if (!root) return [];
+  const stack = [root];
+  const leaves = [];
+  
+  while(stack.length) {
+    const current = stack.pop();
+    if (!current.left && !current.right) leaves.push(current.val);
+    if (current.right) stack.push(current.right);
+    if (current.left) stack.push(current.left);
+  }
+  return leaves;
+};
+
+const leafList2Rec = (root) => {
+  if (!root) return [];
+  if (!root.left && !root.right) return [root.val];
+  return [...leafList(root.left), ...leafList(root.right)]
+};
