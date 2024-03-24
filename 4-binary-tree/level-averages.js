@@ -111,7 +111,6 @@ const levelAverages3 = (root) => {
   return averages;
 };
 
-
 const levelAverages2Rec = (root) => {
   if (!root) return []; 
   const averages = [];
