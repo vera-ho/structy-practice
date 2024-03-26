@@ -84,8 +84,8 @@ const convertToGraph = edges => {
 // Save already calculated path counts for nodes and reuse value if the node needs to be traversed again
 // Is a sneaky DP problem
 
-// Time complexity: 
-// Space complexity:
+// Time complexity: linear O(p) - traverse each edge once
+// Space complexity: linear O(c) - store each node once
 const semestersRequired2 = (numCourses, prereqs) => {
   const graph = edgesToGraph(prereqs, numCourses);
   const visited = {};
