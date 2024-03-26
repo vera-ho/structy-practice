@@ -88,3 +88,71 @@ const convertToGraph = edges => {
 
     return graph;
 }
+
+
+// Write a function, undirectedPath, that takes in an array of edges for an undirected graph and two nodes (nodeA, nodeB). The function should return a boolean indicating whether or not there exists a path between nodeA and nodeB.
+
+// Approach: 
+// Turn edges into an undirected graph
+// Track visited nodes since graph is undirected (infinite loop prevention) using a set for constant lookup and add times
+
+// Iterate though each edge and add node key to the object if it doesn't exist yet
+// Add the neighbor to the node if it hasn't been added yet
+// No need to check if a neighbor already exists since the edge happens only once per set of nodes
+const edgesToGraph = edges => {
+  const graph = {};
+  
+  for(let edge of edges) {
+    // set first node (edge[0])
+    if(edge[0] in graph) graph[edge[0]].push(edge[1])
+    else graph[edge[0]] = [edge[1]]
+    // set second node (edge[1])
+    if(edge[1] in graph) graph[edge[1]].push(edge[0])
+    else graph[edge[1]] = [edge[0]]
+  }
+  
+  return graph;
+}
+
+// Time complexity: quadratic O(n^2) or linear O(e)
+// Space complexity: linear O(n) 
+const undirectedPath2BFS = (edges, nodeA, nodeB) => {
+  const graph = edgesToGraph(edges);
+  const visited = new Set();
+  const queue = [nodeA];
+  
+  while (queue.length) {
+    const current = queue.shift();
+    if(current === nodeB) return true;
+    
+    // Add current node to visited set so we don't revisit it
+    visited.add(current);
+    
+    // Add neighbors to queue if they haven't been visited yet
+    for(let neighbor of graph[current]) {
+      if(!visited.has(neighbor)) queue.push(neighbor)
+    }
+  }
+  
+  return false;
+};
+
+// Time complexity: quadratic O(n^2) or linear O(e)
+// Space complexity: linear O(n) 
+const undirectedPath2RecDFS = (edges, nodeA, nodeB) => {
+  const graph = edgesToGraph(edges);
+  const visited = new Set();
+  return hasPath(graph, nodeA, nodeB, visited);
+};
+
+// Helper
+const hasPath = (graph, origin, destination, visited) => {
+  if(origin === destination) return true;
+  visited.add(origin);
+  
+  for (let neighbor of graph[origin]) {
+    // If the neighbor hasn't been visited yet, check if it has path to destination
+    if(!visited.has(neighbor) && hasPath(graph, neighbor, destination, visited)) return true;
+  }
+  return false;
+}
