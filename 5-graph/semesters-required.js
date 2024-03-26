@@ -69,3 +69,60 @@ const convertToGraph = edges => {
 //     '4': [], 
 //     '5': [] 
 // };
+
+
+// ------------------------------------------------------------------------- //
+
+// Write a function, semestersRequired, that takes in a number of courses (n) and a list of prerequisites as arguments. Courses have ids ranging from 0 through n - 1. A single prerequisite of [A, B] means that course A must be taken before course B. Return the minimum number of semesters required to complete all n courses. There is no limit on how many courses you can take in a single semester, as long the prerequisites of a course are satisfied before taking it.
+// Note that given prerequisite [A, B], you cannot take course A and course B concurrently in the same semester. You must take A in some semester before B.
+// You can assume that it is possible to eventually complete all courses.
+
+// Approach: 
+// Prereqs are like an edge list, so convert to an adjacency list for a directed, acyclic graph (DAG)
+// Classes that aren't a prereq for another class, have an emtpy neighbor array
+// The shortest number of semesters is the number of nodes in the longest path
+// Save already calculated path counts for nodes and reuse value if the node needs to be traversed again
+// Is a sneaky DP problem
+
+// Time complexity: 
+// Space complexity:
+const semestersRequired2 = (numCourses, prereqs) => {
+  const graph = edgesToGraph(prereqs, numCourses);
+  const visited = {};
+  let semesters = 0;
+  
+  for (let course in graph) {
+    const count = getLearned(graph, course, visited);
+    if (count > semesters) semesters = count;
+  }
+  return semesters;
+};
+
+// Traverse the node
+const getLearned = (graph, node, visited) => {
+  if (visited[node]) return visited[node];
+  if (!graph[node].length) return 1; // class that is not a prereq to any other class
+  let maxDistance = 0;
+  
+  for (let neighbor of graph[node]) {
+    const distance = getLearned(graph, neighbor, visited) + 1;
+    if (distance > maxDistance) maxDistance = distance;
+  }
+  visited[node] = maxDistance;
+  return maxDistance;
+}
+
+// Convert to graph
+const edgesToGraph = (edges, num) => {
+  const graph = {};
+  
+  // Initialize graph to store all courses
+  for (let i = 0; i < num; i++) {
+    graph[i] = [];
+  }
+  
+  for (let edge of edges) {
+    graph[edge[0]].push(edge[1]);
+  }
+  return graph;
+}
