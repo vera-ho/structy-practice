@@ -51,6 +51,8 @@ const exploreIsland = (grid, row, col, visited) => {
 // Iterate though grid and look for land. Traverse through the island and count how many L's are found
 // Track visited L & W with a Set
 // Compare each island size with the smallest found (so far) and update if its smaller
+
+// Time and space complexity: Linear O(r * c)
 const minimumIsland2 = (grid) => {
   const visited = new Set();
   let smallestIsland = Infinity;
@@ -76,6 +78,7 @@ const minimumIsland2 = (grid) => {
 
 // Previously visited or water contribute 0 to island size
 const exploreIsland2 = (grid, row, col, visited) => {
+  // Recursive
   if (visited.has(row + ' ' + col)) return 0;
   visited.add(row + ' ' + col);
   if (grid[row][col] === "W") return 0;
@@ -89,7 +92,33 @@ const exploreIsland2 = (grid, row, col, visited) => {
   }
   
   return size;
+  
+//   // Iterative - messier Set management
+//   if (visited.has(row + ' ' + col)) return;
+//   if (grid[row][col] === "W") return;
+  
+//   const stack = [[row, col]];
+//   let size = 0;
+  
+//   while (stack.length) {
+//     const [row, col] = stack.pop();
+//     const neighbors = getNeighbors(grid, row, col);
+//     if (visited.has(row + ' ' + col)) continue;
+//     else visited.add(row + ' ' + col);
+//     size++;
+    
+//     for (let neighbor of neighbors) {
+//       const [nextRow, nextCol] = neighbor;
+//       if (grid[nextRow][nextCol] === "L") {
+//         stack.push(neighbor);
+//       }
+//     }
+//   }
+  
+//   return size;
 };
+
+
 
 // Possible directions from a cell (up down left right)
 const directions = [
@@ -103,7 +132,7 @@ const directions = [
 // Does not check if neighbor is land or water
 const getNeighbors = (grid, row, col) => {
   const neighbors = [];
-  
+
   for (const direction of directions) {
     const [x, y] = direction;
     const nextCoord = [row + x, col + y];
