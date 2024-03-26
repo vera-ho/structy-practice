@@ -50,8 +50,8 @@ const exploreIsland = (grid, row, col, visited) => {
 // Traverse island until all of it has been visited and there is nothing left to traverse
 // Add to island count and continue to iterate though 2D array
 
-// Time complexity: 
-// Space complexity: 
+// Time complexity: O(row * col)
+// Space complexity: O(row * col)
 const islandCount2 = (grid) => {
   const visited = new Set();
   let count = 0;
