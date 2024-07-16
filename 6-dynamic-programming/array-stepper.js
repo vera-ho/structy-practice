@@ -53,8 +53,6 @@ const arrayStepperBetter = (nums, index = 0, steps = {}) => {
 const arrayStepper2 = (nums, index = 0, memo = {}) => {
   if (index in memo) return memo[index];
   if (index === nums.length - 1) return true;
-  if (nums[index] === 0) return false;
-  if (index >= nums.length) return false;
 
   const maxSteps = nums[index];
   for (let i = 1; i <= maxSteps; i++) {
