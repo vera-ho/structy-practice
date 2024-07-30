@@ -1,48 +1,6 @@
-// Time complexity: O(n) linear
-// Space complexity: O(n) linear
-// Iterative DFS solution
+// Write a function, treeMinValue, that takes in the root of a binary tree that contains number values. 
+// The function should return the minimum value within the tree.
 const treeMinValue = (root) => {
-    let stack = [root];
-    let minVal = Infinity;
-    
-    while(stack.length > 0) {
-        let node = stack.pop();
-        if(minVal > node.val) minVal = node.val;
-        if(node.right) stack.push(node.right);
-        if(node.left) stack.push(node.left);
-    }
-    return minVal;
-};
-
-// Time complexity: O(n) linear
-// Space complexity: O(n) linear
-// Recursive DFS solution
-const treeMinValueRecursive = (root) => {
-    if(!root) return Infinity;
-    let leftMin = treeMinValue(root.left);
-    let rightMin = treeMinValue(root.right);
-    return Math.min(root.val, leftMin, rightMin);
-};
-
-// Time complexity: O(n^2) quadratic due to shift
-// Space complexity: O(n) linear
-// Iterative BFS solution
-const treeMinValueBFS = (root) => {
-    let minVal = Infinity;
-    let queue = [root];
-    
-    while(queue.length > 0) {
-        let currentNode = queue.shift();
-        if(minVal > currentNode.val) minVal = currentNode.val;
-        if(currentNode.left) queue.push(currentNode.left);
-        if(currentNode.right) queue.push(currentNode.right);
-    }
-    
-    return minVal;
-};
-
-// Write a function, treeMinValue, that takes in the root of a binary tree that contains number values. The function should return the minimum value within the tree.
-const treeMinValue2 = (root) => {
   let minValue = Infinity;
   
   // stack for DFS & queue for BFS
@@ -64,9 +22,96 @@ const treeMinValue2 = (root) => {
   return minValue;
 };
 
-const treeMinValue2Rec = (root) => {
+const treeMinValueRec = (root) => {
   if (!root) return Infinity;
-  const minLeft = treeMinValue(root.left);
-  const minRight = treeMinValue(root.right);
+  const minLeft = treeMinValueRec(root.left);
+  const minRight = treeMinValueRec(root.right);
   return Math.min(root.val, minLeft, minRight);
 };
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+/*****************************************************************************/
+// const a = new Node(3);
+// const b = new Node(11);
+// const c = new Node(4);
+// const d = new Node(4);
+// const e = new Node(-2);
+// const f = new Node(1);
+
+// a.left = b;
+// a.right = c;
+// b.left = d;
+// b.right = e;
+// c.right = f;
+
+//       3
+//    /    \
+//   11     4
+//  / \      \
+// 4   -2     1
+
+// treeMinValue(a); // -> -2
+
+/*****************************************************************************/
+// const a = new Node(5);
+// const b = new Node(11);
+// const c = new Node(3);
+// const d = new Node(4);
+// const e = new Node(14);
+// const f = new Node(12);
+
+// a.left = b;
+// a.right = c;
+// b.left = d;
+// b.right = e;
+// c.right = f;
+
+//       5
+//    /    \
+//   11     3
+//  / \      \
+// 4   14     12
+
+// treeMinValue(a); // -> 3
+
+/*****************************************************************************/
+// const a = new Node(-1);
+// const b = new Node(-6);
+// const c = new Node(-5);
+// const d = new Node(-3);
+// const e = new Node(-4);
+// const f = new Node(-13);
+// const g = new Node(-2);
+// const h = new Node(-2);
+
+// a.left = b;
+// a.right = c;
+// b.left = d;
+// b.right = e;
+// c.right = f;
+// e.left = g;
+// f.right = h;
+
+//        -1
+//      /   \
+//    -6    -5
+//   /  \     \
+// -3   -4   -13
+//     /       \
+//    -2       -2
+
+// treeMinValue(a); // -> -13
+
+/*****************************************************************************/
+// const a = new Node(42);
+
+//        42
+
+// treeMinValue(a); // -> 42

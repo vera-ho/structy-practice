@@ -1,28 +1,3 @@
-/** Approach
- *      - Base cases:
- *          * root is null, return empty array
- *          * root has no children, return 2D array with root value
- *      - Find paths of children nodes
- *      - Concatenate paths together
- *      - Add current node value to each subarray 
- */
-
-// Time complexity: O(n) linear
-// Space complexity: O(n) linear
-// DFS Recursive solution
-const allTreePaths = (root) => {
-    if(!root) return [];
-    if(!root.left && !root.right) return [[ root.val ]];
-    
-    let paths = [];
-    const leftPath = allTreePaths(root.left);
-    const rightPath = allTreePaths(root.right);
-    
-    paths = paths.concat(leftPath, rightPath);
-    paths.forEach( path => path.unshift(root.val))
-    return paths;
-};
-
 // Write a function, allTreePaths, that takes in the root of a binary tree. The function should return a 2-Dimensional array where each subarray represents a root-to-leaf path in the tree.
 // The order within an individual path must start at the root and end at the leaf, but the relative order among paths in the outer array does not matter.
 // You may assume that the input tree is non-empty.
@@ -34,7 +9,7 @@ const allTreePaths = (root) => {
 
 // Time complexity: linear O(n)
 // Space complexity: linear O(n)
-const allTreePaths2 = (root) => {
+const allTreePaths = (root) => {
   if (!root) return [];
   if(!root.left && !root.right) return [[root.val]]; // Leaf node found
   
@@ -47,3 +22,106 @@ const allTreePaths2 = (root) => {
   rightPath.forEach(path => path.unshift(root.val));
   return [...leftPath, ...rightPath];
 };
+
+/*****************************************************************************/
+// const a = new Node('a');
+// const b = new Node('b');
+// const c = new Node('c');
+// const d = new Node('d');
+// const e = new Node('e');
+// const f = new Node('f');
+
+// a.left = b;
+// a.right = c;
+// b.left = d;
+// b.right = e;
+// c.right = f;
+
+//      a
+//    /   \
+//   b     c
+//  / \     \
+// d   e     f
+
+// allTreePaths(a); // ->
+// [ 
+//   [ 'a', 'b', 'd' ], 
+//   [ 'a', 'b', 'e' ], 
+//   [ 'a', 'c', 'f' ] 
+// ] 
+
+/*****************************************************************************/
+// const a = new Node('a');
+// const b = new Node('b');
+// const c = new Node('c');
+// const d = new Node('d');
+// const e = new Node('e');
+// const f = new Node('f');
+// const g = new Node('g');
+// const h = new Node('h');
+// const i = new Node('i');
+
+// a.left = b;
+// a.right = c;
+// b.left = d;
+// b.right = e;
+// c.right = f;
+// e.left = g;
+// e.right = h;
+// f.left = i;
+
+//         a
+//      /    \
+//     b      c
+//   /  \      \
+//  d    e      f
+//      / \    /   
+//     g  h   i 
+
+// allTreePaths(a); // ->
+// [ 
+//   [ 'a', 'b', 'd' ], 
+//   [ 'a', 'b', 'e', 'g' ], 
+//   [ 'a', 'b', 'e', 'h' ], 
+//   [ 'a', 'c', 'f', 'i' ] 
+// ] 
+
+/*****************************************************************************/
+// const q = new Node('q');
+// const r = new Node('r');
+// const s = new Node('s');
+// const t = new Node('t');
+// const u = new Node('u');
+// const v = new Node('v');
+
+// q.left = r;
+// q.right = s;
+// r.right = t;
+// t.left = u;
+// u.right = v;
+
+//      q
+//    /   \ 
+//   r     s
+//    \
+//     t
+//    /
+//   u
+//  /
+// v
+
+// allTreePaths(q); // ->
+// [ 
+//   [ 'q', 'r', 't', 'u', 'v' ], 
+//   [ 'q', 's' ] 
+// ] 
+
+/*****************************************************************************/
+// const z = new Node('z');
+
+//      z
+
+// allTreePaths(z); // -> 
+// [
+//   ['z']
+// ]
