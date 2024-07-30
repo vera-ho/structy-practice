@@ -1,38 +1,9 @@
-// Time complexity: O(n x m)
-// Space complexity: O(1)
+// Write a function, uncompress, that takes in a string as an argument. The input string will be formatted into multiple groups according to the following pattern:
+// <number><char>
+// for example, '2c' or '3a'.
 
-const uncompress = (s) => {
-    let uncompressed = [];  
-    let i = j = 0;
-    
-    while(j < s.length) {
-      
-        if(!isLetter(s[j])) {
-            j++;
-        } else {
-            let num = s.slice(i, j);
-            let letter = s[j];
-            
-            for(let i = 0; i < num; i++) {
-                uncompressed.push(letter);
-            }
-            
-            j++;
-            i = j;
-        }
-    }
-    
-    return uncompressed.join("");
-};
-  
-const isLetter = char => {
-    return char.length === 1 && (char.toUpperCase() != char.toLowerCase()) 
-}
+// The function should return an uncompressed version of the string where each 'char' of a group is repeated 'number' times consecutively. You may assume that the input string is well-formed according to the previously mentioned pattern.
 
-
-
-
-// ***********************************************
 // approach 
 // set up variable for final string
 // track the current number value
@@ -55,22 +26,15 @@ const uncompress2 = (s) => {
     if (char >= 0) {
       num = num + char;
     } else {
-      uncompressed = uncompressed + char.repeat(num)
-      num = 0
+      uncompressed = uncompressed + char.repeat(num);
+      num = 0;
     }
-    
   }
-  return uncompressed
+  return uncompressed;
 };
 
-// console.log('2t3b')
-//   console.log(uncompress('2t3b'))
-
-// console.log('3n12e2z')
-//   console.log(uncompress('3n12e2z'))
-
-
-module.exports = {
-    uncompress,
-    uncompress2
-};
+// uncompress("2c3a1t"); // -> 'ccaaat'
+// uncompress("4s2b"); // -> 'ssssbb'
+// uncompress("2p1o5p"); // -> 'ppoppppp'
+// uncompress("3n12e2z"); // -> 'nnneeeeeeeeeeeezz'
+// uncompress("127y"); // ->'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'

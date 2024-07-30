@@ -1,39 +1,6 @@
-/** Approach
- *      - Use hash for O(1) reads
- *      - Loop through one string and save key - value pairs of char - count
- *      - Loop through other string and deduct from counter
- *      - If any counter is not 0 in the hash, they are not anagrams
- */
-
-// Time complexity: O(n) linear
-// Space complexity: O(n) linear
-const anagrams = (s1, s2) => {
-    if(s1.length != s2.length) return false;
-    
-    let ctr = {};
-
-    for(let char of s1) {
-        if(ctr[char]) ctr[char]++
-        else ctr[char] = 1
-    }
-      
-    for(let char of s2) {
-        if(ctr[char]) ctr[char]--
-        else ctr[char] = -1
-    }
-    
-    // s1.split("").forEach( char => {
-    //     if(ctr[char]) ctr[char]++
-    //     else ctr[char] = 1
-    // })
-    
-    // s2.split("").forEach( char => {
-    //     if(ctr[char]) ctr[char]--
-    //     else ctr[char] = -1
-    // })
-    
-    return !Object.values(ctr).some( value => value !== 0)
-};
+// Write a function, anagrams, that takes in two strings as arguments. 
+// The function should return a boolean indicating whether or not the strings are anagrams. 
+// Anagrams are strings that contain the same characters, but in any order.
 
 // approach: use an object to count characters in one string
 //           then subtract characters from the other string. 
@@ -64,3 +31,15 @@ const anagrams2 = (s1, s2) => {
   
   return Object.values(count).every(v => v === 0)
 };
+
+// anagrams('restful', 'fluster'); // -> true
+// anagrams('cats', 'tocs'); // -> false
+// anagrams('monkeyswrite', 'newyorktimes'); // -> true
+// anagrams('paper', 'reapa'); // -> false
+// anagrams('elbow', 'below'); // -> true
+// anagrams('tax', 'taxi'); // -> false
+// anagrams('taxi', 'tax'); // -> false
+// anagrams('night', 'thing'); // -> true
+// anagrams('abbc', 'aabc'); // -> false
+// anagrams('po', 'popp'); // -> false
+// anagrams('pp', 'oo') // -> false

@@ -1,67 +1,14 @@
-// Time complexity: O(n)
-// Space complexity: O(n) 
-const mostFrequentChar = (s) => {
-    let counter = {}
-    let mostFrequent = s[0];
-    
-    for(let char of s) {
-        if(counter[char]) counter[char]++
-        else counter[char] = 1
-    }
-    
-    for(let char of s) {
-        if(counter[mostFrequent] < counter[char]) mostFrequent = char
-    }
-    
-    return mostFrequent;
-};
-  
-// console.log(mostFrequentChar("hello"))
-// console.log(mostFrequentChar("potato"))
-  
-// Time complexity: O(n) linear
-// Space complexity: O(n) linear
-const mostFrequentChar2 = (s) => {
-    let counter = {}
-    let maxChar = s[0];
-    
-    for(let char of s) {
-        if(counter[char]) counter[char]++
-        else counter[char] = 1
-    }
-     
-    for(let char in counter) {
-        if(counter[char] > counter[maxChar]) maxChar = char
-    }
-     
-    return maxChar;
-};
+// Write a function, mostFrequentChar, that takes in a string as an argument. The function should return the most frequent character of the string. If there are ties, return the character that appears earlier in the string.
 
-// Time complexity: O(n) linear
-// Space complexity: O(n) linear
-const mostFrequentChar3 = (s) => {
-    let counter = {};
-    
-    // Loop through string and count occurrences of characters
-    for(let char of s) {
-        if(!counter[char]) counter[char] = 0;
-        counter[char] += 1;
-    }
-    
-    // Loop through string and compare counts of each char
-    let mostChar = s[0];
-    for(let char of s) {
-        if(counter[char] > counter[mostChar]) mostChar = char;
-    }
-    
-    return mostChar;
-}
+// You can assume that the input string is non-empty.
 
+// approach
 // loop through string 's' and count all characters - store in object
 // loop through each key of object and set max value of string if a key's value is greater than current max value of string
+
 // time complexity: O(n)
 // space complexity: O(n)
-const mostFrequentChar4 = (s) => {
+const mostFrequentChar = (s) => {
   let maxValue = s[0];
   const count = {};
   
@@ -81,3 +28,11 @@ const mostFrequentChar4 = (s) => {
   
   return maxValue;
 };
+
+// mostFrequentChar('bookeeper'); // -> 'e'
+// mostFrequentChar('david'); // -> 'd'
+// mostFrequentChar('abby'); // -> 'b'
+// mostFrequentChar('mississippi'); // -> 'i'
+// mostFrequentChar('potato'); // -> 'o'
+// mostFrequentChar('eleventennine'); // -> 'e'
+// mostFrequentChar("riverbed"); // -> 'r'

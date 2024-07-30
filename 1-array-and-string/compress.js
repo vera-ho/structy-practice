@@ -1,41 +1,18 @@
-/** Approach
- *      - Count and track consecutive characters
- *      - If character changes, save count if > 1 and character, 
- *      - or just the char if count = 1
- *      - Count of consecutive characters is also the index of new char minus index of first of prev character
- *          - ffddddeejk
- *          - 0123456789
- *          - (6-2) = 4 consecutive d's    
- */
+// Write a function, compress, that takes in a string as an argument. The function should return a compressed version of the string where consecutive occurrences of the same characters are compressed into the number of occurrences followed by the character. Single character occurrences should not be changed.
+// 'aaa' compresses to '3a'
+// 'cc' compresses to '2c'
+// 't' should remain as 't'
+// You can assume that the input only contains alphabetic characters.
 
-// Time complexity: O(n)
-// Space complexity: O(n)
-const compress = (s) => {
-    let result = [];
-    let prev = curr = 0;
-    
-    while(curr <= s.length) {
-        let count = curr - prev;
-      
-        if(s[prev] != s[curr]) {
-            if(count > 1) {
-                result.push(count, s[prev]);
-            } else {
-                result.push(s[prev]);
-            }
-        
-            prev = curr;
-        } else {
-            curr++;
-        }
-    }
-    
-    return result.join("");
-};
+// Approach: 
+// Track current and previous char to identify when a continuous substring of a char has broken and a new substring begins
+// When prev != curr, add 1 to count to account for prev and reset count
+// When prev == curr, add 1 to count
+// Add to compressed when prev != curr by pushing the char if count is 1 or pushing count & char when count > 1
 
-// time complexity: O(n) - runs through n characters in s
-// space complexity: O(n) only need storage for max n characters in s (if each character shows up just once)
-function compress2(s) {
+// time complexity: O(n) - runs through n characters in string s
+// space complexity: O(n) only need storage for max n characters in string s (if each character shows up just once)
+function compress(s) {
   const compressed = [];
   let count = 0;
   
@@ -55,3 +32,10 @@ function compress2(s) {
   
   return compressed.join('');
 }
+
+// compress('ccaaatsss'); // -> '2c3at3s'
+// compress('ssssbbz'); // -> '4s2bz'
+// compress('ppoppppp'); // -> '2po5p'
+// compress('nnneeeeeeeeeeeezz'); // -> '3n12e2z'
+// compress('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'); 
+// // -> '127y'
