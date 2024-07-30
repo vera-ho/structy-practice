@@ -1,3 +1,6 @@
+// Write a function, sumList, that takes in the head of a linked list containing numbers as an argument. 
+// The function should return the total sum of all values in the linked list.
+
 // Approach
 // * Iterative
 //      - Pointer to track current node
@@ -31,25 +34,38 @@ const sumListRecursive = (head) => {
     return head.val + sumListRecursive(head.next)
 };
 
+/*****************************************************************************/
+// const a = new Node(2);
+// const b = new Node(8);
+// const c = new Node(3);
+// const d = new Node(-1);
+// const e = new Node(7);
 
-// Write a function, sumList, that takes in the head of a linked list containing numbers as an argument. The function should return the total sum of all values in the linked list.
-// approach
-// Iterate through each node of the linked list and add values as we go along
-// time complexity: linear O(n)
-// space complexity: constant O(n) for linear / linear O(n) for recursive
-const sumList2 = (head) => {
-  let sum = 0;
-  let currentNode = head;
-  
-  while (currentNode) {
-    sum += currentNode.val;
-    currentNode = currentNode.next;
-  }
-  
-  return sum;
-};
+// a.next = b;
+// b.next = c;
+// c.next = d;
+// d.next = e;
 
-const sumList2Rec = (head) => {
-  if (!head) return 0;
-  return head.val + sumList(head.next);
-};
+// 2 -> 8 -> 3 -> -1 -> 7
+
+// sumList(a); // 19
+
+/*****************************************************************************/
+// const x = new Node(38);
+// const y = new Node(4);
+
+// x.next = y;
+
+// 38 -> 4
+
+// sumList(x); // 42
+
+/*****************************************************************************/
+// const z = new Node(100);
+
+// 100
+
+// sumList(z); // 100
+
+/*****************************************************************************/
+// sumList(null); // 0
