@@ -10,12 +10,16 @@
 // recursively call fibonacci with n - 1 and n - 2 and sum the two results
 
 // TC: O(2^n) exponential
-// SC: O(n) linear
+// SC: O(n) linear - not all calls are on the stack at the same time
 const fibonacci = (n) => {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 };
 
-module.exports = {
-  fibonacci,
-};
+// fibonacci(0); // -> 0
+// fibonacci(1); // -> 1
+// fibonacci(2); // -> 1
+// fibonacci(3); // -> 2
+// fibonacci(4); // -> 3
+// fibonacci(5); // -> 5
+// fibonacci(8); // -> 21

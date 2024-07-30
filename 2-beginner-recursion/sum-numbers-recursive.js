@@ -14,6 +14,18 @@ const sumNumbersRecursive = (numbers) => {
   return firstNum + sumNumbersRecursive(otherNumbers);
 };
 
-module.exports = {
-  sumNumbersRecursive,
+// optimize using pointer?
+// TC: O(n) linear
+// SC: O(n) linear
+const sumNumbersRecursiveOptimized = (numbers, ptr = 0) => {
+  if (ptr === numbers.length) return 0;
+  return numbers[ptr] + sumNumbersRecursiveOptimized(numbers, ptr + 1);
 };
+
+// sumNumbersRecursive([5, 2, 9, 10]); // -> 26
+// sumNumbersRecursive([1, -1, 1, -1, 1, -1, 1]); // -> 1
+// sumNumbersRecursive([]); // -> 0
+// sumNumbersRecursive([1000, 0, 0, 0, 0, 0, 1]); // -> 1001
+// sumNumbersRecursive([700, 70, 7]); // -> 777
+// sumNumbersRecursive([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1]); // -> -55
+// sumNumbersRecursive([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); // -> 0

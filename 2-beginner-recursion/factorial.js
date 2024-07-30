@@ -17,6 +17,10 @@ const factorial = (n) => {
   return n * factorial(n - 1);
 };
 
-module.exports = {
-  factorial,
-};
+
+// factorial(3); // -> 6
+// factorial(6); // -> 720
+// factorial(18); // -> 6402373705728000
+// factorial(1); // -> 1
+// factorial(13); // -> 6227020800
+// factorial(0); // -> 1

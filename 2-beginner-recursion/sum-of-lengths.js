@@ -15,6 +15,16 @@ const sumOfLengths = (strings) => {
   return current.length + sumOfLengths(otherStrings);
 };
 
-module.exports = {
-  sumOfLengths,
+// Optimize with pointer
+// TC: O(n) linear
+// SC: O(n) linear
+const sumOfLengthsOptimized = (strings, idx = 0) => {
+  if(idx === strings.length) return 0;
+  return strings[idx].length + sumOfLengthsOptimized(strings, idx + 1);
 };
+
+// sumOfLengths(["goat", "cat", "purple"]); // -> 13
+// sumOfLengths(["bike", "at", "pencils", "phone"]); // -> 18
+// sumOfLengths([]); // -> 0
+// sumOfLengths(["", " ", "  ", "   ", "    ", "     "]); // -> 15
+// sumOfLengths(["0", "313", "1234567890"]); // -> 14 

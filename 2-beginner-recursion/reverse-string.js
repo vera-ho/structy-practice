@@ -9,9 +9,18 @@
 // SC: O(n^2)
 const reverseString = (s) => {
   if (s.length === 0) return '';
-  return reverseString(s.slice(1)) + s[0]
+  return reverseString(s.slice(1)) + s[0];
 };
 
-module.exports = {
-  reverseString,
+// Optimization
+// TC: O(n) linear
+// SC: O(n) linear
+const reverseStringOptimized = (s, idx = 0) => {
+  if (idx === s.length) return '';
+  return reverseStringOptimized(s, idx + 1) + s[idx];
 };
+
+// reverseString("hello"); // -> "olleh"
+// reverseString("abcdefg"); // -> "gfedcba"
+// reverseString("stopwatch"); // -> "hctawpots"
+// reverseString(""); // -> ""

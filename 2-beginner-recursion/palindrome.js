@@ -14,7 +14,20 @@ const palindrome = (s) => {
   return palindrome(s.slice(1, s.length - 1))
 };
 
-module.exports = {
-  palindrome,
+// Optimization?
+// Use left and right pointers instead of slicing
+// TC: O(n) linear
+// SC: O(n) linear
+const palindromeOptimized = (s, start = 0, end = s.length - 1) => {
+  if (s.length <= 1 || start === end) return true;
+  if (s[start] !== s[end]) return false;
+  return palindromeOptimized(s, start + 1, end - 1);
 };
- 
+
+// palindrome("pop"); // -> true
+// palindrome("kayak"); // -> true
+// palindrome("pops"); // -> false
+// palindrome("boot"); // -> false
+// palindrome("rotator"); // -> true
+// palindrome("abcbca"); // -> false
+// palindrome(""); // -> true
