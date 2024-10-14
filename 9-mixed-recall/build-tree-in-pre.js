@@ -11,31 +11,57 @@ class Node {
 
 // Approach
 // in the preOrder array, the first element is the subtree's root value
-// find the index of this value in the inOrder array and split both arrays into left/right subarrays
-// recurisvely call buildTreeInPre with the new subarrays 
+// find the index of this value in the inOrder array and track the indicies of left and right subtrees (for in-place logic)
+// recurisvely call buildTreeInPre with the indicies of the subtree
 // set the root.left and root.right to the return node of the recurisve calls
 
-// Time complexity: O(n^2) quadratic - call stack + array copies
-// Space complexity: O(n^2) quadratic
-const buildTreeInPre = (inOrder, preOrder) => {
-  if (inOrder.length === 0 || preOrder.length === 0) return null;
+// Index tracking
+// inStart -> starts at 0 for the beginning of the array
+//    left: pass inStart through to next call
+//    right: rootIndex + 1 for the value after the root node value
+// inEnd -> starts at inOrder.length - 1 for the last element of the array
+//    left: rootIndex - 1 to take out the root node value
+//    right: pass inEnd through to next call
+// preStart -> starts at 0 for the beginning of the array
+//    left: prestart + 1 to exlude the root node from prev call
+//    right: prestart + (rootIndex - inStart) + 1 where (rootIndex - inStart is the left length) so preStart points to the element after left values in preOrder
+// preEnd -> starts at preOrder.length - 1 for the last element of the array
+//    left: prestart + (rootIndex - inStart) 
+//    right: pass 
 
-  // Find the value of the root node create node
-  const rootVal = preOrder[0];
+// Time complexity: O(n) linear
+// Space complexity: O(n) linear
+const buildTreeInPre = (
+  inOrder, 
+  preOrder, 
+  inStart = 0, 
+  inEnd = inOrder.length - 1, 
+  preStart = 0, 
+  preEnd = preOrder.length - 1 
+) => {
+  if (inStart > inEnd) return null;
+
+  const rootVal = preOrder[preStart];
   const rootIndex = inOrder.indexOf(rootVal);
   const root = new Node(rootVal);
 
-  // Split the arrays into left & right subarrays
-  const inOrderLeft = inOrder.slice(0, rootIndex);
-  const inOrderRight = inOrder.slice(rootIndex + 1);
-
-  const inOrderLength = inOrderLeft.length;
-  const preOrderLeft = preOrder.slice(1, inOrderLength + 1);
-  const preOrderRight = preOrder.slice(inOrderLength + 1);
-
-  // Build the subtrees
-  root.left = buildTreeInPre(inOrderLeft, preOrderLeft);
-  root.right = buildTreeInPre(inOrderRight, preOrderRight);
+  root.left = buildTreeInPre(
+    inOrder, 
+    preOrder, 
+    inStart, 
+    rootIndex - 1, 
+    preStart + 1, 
+    rootIndex + rootIndex - inStart
+  );
+  root.right = buildTreeInPre(
+    inOrder, 
+    preOrder, 
+    rootIndex + 1, 
+    inEnd, 
+    preStart + rootIndex - inStart + 1, 
+    preEnd
+  );
+  
   return root;
 };
 

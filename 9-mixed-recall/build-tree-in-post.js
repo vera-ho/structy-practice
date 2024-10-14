@@ -15,33 +15,61 @@ class Node {
 // That pattern repeats for each subtree
 
 // Take the last element of postOrder and create a node for the value
-// Find the index of that value in inOrder and split into left/right arrays
-// Take the length of the left array and split postOrder into left/right arrays
-// Recursively call buildTreeInPost with updated inOrder and postOrder arrays
+// Find the index of that value in inOrder and the length of the left array
+// Recursively call buildTreeInPost with updated inOrder and postOrder arrays along with updated indicices for start/end values for in and post arrays
 // Take the return value from each and add as root.left and root.right to the root node
 
-// Time complexity: O(n^2) quadratic - call stack + copies of arrays
-// Space complexity: O(n^2) quadratic
-const buildTreeInPost = (inOrder, postOrder) => {
-  if (inOrder.length === 0 || postOrder.length === 0) return null;
+// Index tracking
+// leftLength -> rootIndex - inStart
+// inStart
+//    left -> inStart (pass through)
+//    right -> rootIndex + 1
+// inEnd
+//    left -> rootIndex - 1
+//    right -> inEnd
+// postStart
+//    left -> postStart
+//    right -> leftLength
+// postEnd
+//    left -> postStart + leftLength - 1
+//    right -> postEnd - 1
+
+// Time complexity: O(n) linear
+// Space complexity: O(n) linear
+const buildTreeInPost = (
+  inOrder, 
+  postOrder,
+  inStart = 0,
+  inEnd = inOrder.length - 1,
+  postStart = 0,
+  postEnd = postOrder.length - 1
+) => {
+  if (inStart > inEnd || postStart > postEnd) return null;
   
   // Create the subtree's root node
-  const lastPostIndex = postOrder.length - 1;
-  const rootValue = postOrder[lastPostIndex];
+  const rootValue = postOrder[postEnd];
   const root = new Node(rootValue);
-  
-  // Divide the inOrder and postOrder arrays into left and right arrays
   const rootIndex = inOrder.indexOf(rootValue);
-  const inOrderLeft = inOrder.slice(0, rootIndex);
-  const inOrderRight = inOrder.slice(rootIndex + 1);
-
-  const leftLength = inOrderLeft.length;
-  const postOrderLeft = postOrder.slice(0, leftLength);
-  const postOrderRight = postOrder.slice(leftLength, lastPostIndex);
 
   // Add subtrees to root
-  root.left = buildTreeInPost(inOrderLeft, postOrderLeft);
-  root.right = buildTreeInPost(inOrderRight, postOrderRight);
+  root.left = buildTreeInPost(
+    inOrder, 
+    postOrder,
+    inStart,
+    rootIndex - 1, 
+    postStart,
+    postStart + rootIndex - inStart - 1
+  );
+
+  root.right = buildTreeInPost(
+    inOrder, 
+    postOrder,
+    rootIndex + 1, 
+    inEnd,
+    rootIndex - inStart,
+    postEnd - 1
+  );
+
   return root;
 };
 
@@ -78,6 +106,29 @@ const buildTreeInPost = (inOrder, postOrder) => {
 // // d   e      f
 // //    / \
 // //    g  h
+
+// Original root 'a'
+// [ 'd', 'b', 'g', 'e', 'h', 'a', 'c', 'f' ],
+// [ 'd', 'g', 'h', 'e', 'b', 'f', 'c', 'a' ] 
+//    0    1    2    3    4    5    6    7
+
+// 'a' left: rootIndex = 5           'a' right:         
+// [ 'd', 'b', 'g', 'e', 'h' ],      [ 'c', 'f' ]
+//    0    1    2    3    4             6    7
+// [ 'd', 'g', 'h', 'e', 'b' ]       [ 'f', 'c' ]
+//    0    1    2    3    4             5    6    
+
+// 'b' left:     'b' right:  rootIndex = 1    'c' left is null   'c' right: rootIndex = 6
+// [ 'd' ],      [ 'g', 'e', 'h' ]               null            [ 'f' ]       
+//    0             2    3    4                                     7
+// [ 'd' ]       [ 'g', 'h', 'e' ]               null            [ 'f' ]
+//    0             1    2    3                                     5
+
+// 'e' left:     'e' right:  rootIndex = 3         
+// [ 'g' ],      [ 'h' ]              
+//    2             4           
+// [ 'g' ]       [ 'h' ]       
+//    1             2      
 
 /*********************************************************************/
 
