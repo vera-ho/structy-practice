@@ -40,10 +40,6 @@ const tokenReplace = (s, tokens) => {
   return string.join('');
 };
 
-module.exports = {
-  tokenReplace,
-};
-
 // const tokens = {
 //   $LOCATION$: "park",
 //   $ANIMAL$: "dog",
