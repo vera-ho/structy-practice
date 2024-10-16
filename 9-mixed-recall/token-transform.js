@@ -13,8 +13,8 @@
 // n - string or value length; m = number of tokens
 // Time complexity: O(n^m) exponential
 // Space complexity:  O(n^m) exponential
-const tokenTransform = (s, tokens, memo = {}) => {
-  if (s in memo) return memo[s];
+const tokenTransform = (s, tokens) => {
+  if (s in tokens) return tokens[s];
   
   const string = [];
   let start = 0;
@@ -31,9 +31,9 @@ const tokenTransform = (s, tokens, memo = {}) => {
         end++;
       } else {
         const token = s.slice(start, end + 1);
-        const value = tokenTransform(tokens[token], tokens, memo);
+        const value = tokenTransform(tokens[token], tokens);
 
-        memo[tokens[token]] = value;
+        tokens[token] = value;
         string.push(value);
         
         start = end + 1;
