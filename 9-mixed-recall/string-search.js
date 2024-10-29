@@ -23,21 +23,21 @@ const stringSearch = (grid, s) => {
   return false;
 };
 
-const searchForString = (grid, row, col, s, index, visited = new Set()) => {
-  const key = row + ' ' + col;
-  if (visited.has(key)) return false;
-  
+const searchForString = (grid, row, col, s, index) => {
   if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length) return false;
   if (grid[row][col] !== s[index]) return false;
   if (index >= s.length - 1) return true;
 
-  const up = searchForString(grid, row - 1, col, s, index + 1, visited);
-  const down = searchForString(grid, row + 1, col, s, index + 1, visited);
-  const left = searchForString(grid, row, col - 1, s, index + 1, visited);
-  const right = searchForString(grid, row, col + 1, s, index + 1, visited);
+  const currentChar = grid[row][col];
+  grid[row][col] = '*';
 
-  visited.add(key);
-  return up || down || left || right;
+  const result = searchForString(grid, row - 1, col, s, index + 1) ||
+    searchForString(grid, row + 1, col, s, index + 1) ||
+    searchForString(grid, row, col - 1, s, index + 1) ||
+    searchForString(grid, row, col + 1, s, index + 1);
+
+  grid[row][col] = currentChar;
+  return result;
 }
 
 // const grid0 = [
