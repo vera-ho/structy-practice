@@ -5,43 +5,33 @@
 // Approach
 // Use an object to count occurences of each character
 // Iterate through each array and compare counts
-// Push the min count of any item into the output array and set the object values to 0
+// Compare counts in both counters and push min of matches into output array
 
 // Time complexity: O(n + m) linear
 // Space complexity: O(n + m) linear
 const intersectionWithDupes = (a, b) => {
     const intersections = [];
-    const countA = {};
-    const countB = {};
+    const countA = countArrayElements(a);
+    const countB = countArrayElements(b);
 
-    // Fill up counters
-    for (let item of a) {
-        if (!countA[item]) {
-            countA[item] = 0;
-        }
-        countA[item]++;
-    }
-
-    for (let item of b) {
-        if (!countB[item]) {
-            countB[item] = 0;
-        }
-        countB[item]++;
-    }
-
-    // Check for intersections
-    for (let item of a) {
+    for (let item in countA) {
         if (!countB[item]) continue;
-
         const matches = Math.min(countA[item], countB[item]);
         for (let i = 0; i < matches; i++) {
             intersections.push(item);
         }
-        countA[item] = 0;
-        countB[item] = 0;
     }
 
     return intersections;
+};
+
+const countArrayElements = (array) => {
+    const counts = {};
+    for (let ele of array) {
+        if (!counts[ele]) counts[ele] = 0;
+        counts[ele]++;
+    }
+    return counts;
 };
 
 // intersectionWithDupes(
