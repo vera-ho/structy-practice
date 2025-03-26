@@ -15,9 +15,8 @@ const runningSum = (numbers) => {
     let currentSum = 0;
 
     for (let i = 0; i < numbers.length; i++) {
-        const newSum = numbers[i] + currentSum;
-        sums.push(newSum);
-        currentSum = newSum;
+        currentSum += numbers[i];
+        sums.push(currentSum);
     }
 
     return sums;
