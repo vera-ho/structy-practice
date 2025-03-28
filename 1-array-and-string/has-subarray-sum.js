@@ -3,11 +3,12 @@
 // A subarray is a consecutive series of one or more elements of the array.
 
 // Approach
-// Calculate pre-fix sums
-// Nested loops to calcuate the difference btwn sums[end] minus sums[start]
-// Return true if the difference equals the targetSum
+// Calculate running sums
+// Loop through running sums and create a set of each value seen
+//   For each value, fnd the difference of value - targetSum
+//   If the difference is in the set, a subarraySum has been found
 
-// Time complexity: O(n^2) quadratic
+// Time complexity: O(n) linear
 // Space complexity: O(n) linear
 const hasSubarraySum = (numbers, targetSum) => {
     const runningSums = [0];
@@ -19,12 +20,14 @@ const hasSubarraySum = (numbers, targetSum) => {
         runningSums.push(runningSum);
     }
 
+    const seenNums = new Set();
     for (let i = 0; i < runningSums.length; i++) {
-        for (let j = i + 1; j < runningSums.length; j++) {
-            const diff = runningSums[j] - runningSums[i];
-            if (diff === targetSum) {
-                return true;
-            }
+        const currentNum = runningSums[i];
+        const diff = currentNum - targetSum;
+        if (seenNums.has(diff)) {
+            return true;
+        } else {
+            seenNums.add(currentNum);
         }
     }
 
