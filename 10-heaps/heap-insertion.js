@@ -25,24 +25,34 @@ class MinHeap {
         return this.array.length;
     }
 
+    swap(idx1, idx2) {
+        [this.array[idx1], this.array[idx2]] = [
+            this.array[idx2],
+            this.array[idx1],
+        ];
+    }
+
+    siftUp(idx) {
+        let valIdx = idx;
+        while (valIdx > 0) {
+            let parentIdx = Math.floor((valIdx - 1) / 2);
+            let parentVal = this.array[parentIdx];
+
+            if (parentVal > this.array[valIdx]) {
+                this.swap(valIdx, parentIdx);
+                valIdx = parentIdx;
+            } else {
+                break;
+            }
+        }
+    }
+
     insert(val) {
         if (this.isEmpty()) {
             this.array.push(val);
         } else {
             this.array.push(val);
-            let valIdx = this.size() - 1;
-            let parentIdx = Math.floor((valIdx - 1) / 2);
-            let parentVal = this.array[parentIdx];
-
-            while (parentVal > val) {
-                [this.array[parentIdx], this.array[valIdx]] = [
-                    this.array[valIdx],
-                    this.array[parentIdx],
-                ];
-                valIdx = parentIdx;
-                parentIdx = Math.floor((valIdx - 1) / 2);
-                parentVal = this.array[parentIdx];
-            }
+            this.siftUp(this.size() - 1);
         }
     }
 }
