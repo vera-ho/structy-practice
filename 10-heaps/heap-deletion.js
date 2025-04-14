@@ -4,7 +4,7 @@
 // Approach
 // Save root value because we know its the smallest value in the heap
 // Move the last value in the array to index 0 and start sift down
-//    Calculate the indicies of children of the current index; if index is out of bounds, use Infinity
+//    Calculate the indicies of children of the current index
 //    Compare values of the children and pick the smaller one's index
 //    Swap current index and smaller value's index until current index is out of bounds
 
