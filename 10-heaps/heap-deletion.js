@@ -53,8 +53,8 @@ class MinHeap {
     siftDown() {
         let currentIdx = 0;
         while (currentIdx < this.array.length) {
-            const leftIdx = 2 * currentIdx + 1 || Infinity;
-            const rightIdx = 2 * currentIdx + 2 || Infinity;
+            const leftIdx = 2 * currentIdx + 1;
+            const rightIdx = 2 * currentIdx + 2;
             const swapIndex =
                 this.array[leftIdx] > this.array[rightIdx] ? rightIdx : leftIdx;
 
